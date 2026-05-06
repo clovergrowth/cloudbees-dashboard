@@ -1135,20 +1135,28 @@ async function init() {
     datasets: [{ data: [sdOk>0?sdOk:0, sdErrors, sdWarnings], backgroundColor: [GREEN, RED, ORANGE], borderWidth:2, borderColor:'#111' }]
   }, options: { plugins:{legend:{position:'bottom'}}, cutout:'60%' } });
 
-  buildTable(document.querySelector('#sd-table'), ['URL','Has Schema','Types','JSON-LD','Errors','Warnings'],
-    structuredData.slice(0,300), r => `<tr>
-      <td title="${r.Address}">${r.Address}</td>
-      <td>${(r['Total Types']||0)>0?badge('Yes','green'):badge('No','orange')}</td>
-      <td>${r['Total Types']||0}</td>
-      <td>${(r['JSON-LD URLs']||r['Type-1'])?badge('JSON-LD','blue'):badge('None','muted')}</td>
-      <td>${(r.Errors||0)>0?badge(r.Errors,'red'):0}</td>
-      <td>${(r.Warnings||0)>0?badge(r.Warnings,'orange'):0}</td>
-    </tr>`);
+  buildTable(document.querySelector('#sd-table'), ['URL','Has Schema','Schema Type','Errors','Warnings','Schema Warning'],
+    structuredData.slice(0,300), r => {
+      const hasSchema = (r['Total Types']||0) > 0;
+      const schemaType = r['Schema Type'] || r['Type-1'] || '—';
+      const warning = r['Schema Warning'] || '';
+      const errCount = r.Errors || 0;
+      const warnCount = r.Warnings || 0;
+      return `<tr>
+        <td title="${r.Address}">${r.Address}</td>
+        <td>${hasSchema ? badge('Yes','green') : badge('No','orange')}</td>
+        <td>${schemaType !== 'None' && schemaType ? badge(schemaType, 'blue') : badge('None','muted')}</td>
+        <td>${errCount > 0 ? badge(errCount,'red') : badge(0,'muted')}</td>
+        <td>${warnCount > 0 ? badge(warnCount,'orange') : badge(0,'muted')}</td>
+        <td style="font-size:11px;color:${warning ? 'var(--red)' : 'var(--muted)'};max-width:320px;white-space:normal;line-height:1.4">${warning || '—'}</td>
+      </tr>`;
+    });
   addOptionsFilter('sd-table', 'Schema filter', [
     { label: 'Has schema',      fn: r => r.cells[1]?.textContent.trim() === 'Yes' },
     { label: 'No schema',       fn: r => r.cells[1]?.textContent.trim() === 'No' },
-    { label: 'Has errors',      fn: r => +r.cells[4]?.textContent.trim() > 0 },
-    { label: 'Has warnings',    fn: r => +r.cells[5]?.textContent.trim() > 0 },
+    { label: 'Has errors',      fn: r => +r.cells[3]?.textContent.trim() > 0 },
+    { label: 'Has warnings',    fn: r => +r.cells[4]?.textContent.trim() > 0 },
+    { label: 'Has warning text',fn: r => r.cells[5]?.textContent.trim() !== '—' && r.cells[5]?.textContent.trim() !== '' },
   ]);
 
   // ── SECURITY ──

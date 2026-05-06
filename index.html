@@ -284,13 +284,42 @@
   @media (max-width: 768px) {
     .menu-toggle { display: flex; align-items: center; justify-content: center; }
 
+    /* Sidebar off-screen by default */
     .sidebar {
       transform: translateX(-100%);
       transition: transform 0.28s cubic-bezier(0.4,0,0.2,1);
     }
     .sidebar.open { transform: translateX(0); }
-
     .main { margin-left: 0; }
+
+    /* Topbar — tighter */
+    .topbar { padding: 14px 16px; }
+    .topbar-date { display: none; }
+
+    /* Content — less padding */
+    .content { padding: 16px 14px; }
+
+    /* Section headings */
+    .section-head h2 { font-size: 18px; }
+
+    /* Scorecards — 2 columns */
+    .scorecards { grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 18px; }
+    .scorecard { padding: 16px; }
+    .scorecard-value { font-size: 24px; }
+
+    /* Charts — single column, shorter */
+    .charts-grid { grid-template-columns: 1fr; gap: 14px; margin-bottom: 18px; }
+    .chart-wrap { height: 180px; }
+    .chart-wrap.tall { height: 200px; }
+    .chart-card { padding: 16px; }
+
+    /* Table header — stack label + search */
+    .table-header { flex-direction: column; align-items: flex-start; gap: 10px; padding: 14px 16px; }
+    .table-search { width: 100%; }
+
+    /* Table rows — smaller text, tighter padding */
+    td { padding: 10px 12px; font-size: 12px; max-width: 200px; }
+    th { padding: 10px 12px; }
   }
 </style>
 </head>

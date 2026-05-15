@@ -807,8 +807,10 @@ async function init() {
 
   // Crawl depth
   const depthMap = {};
-  // SF exports depth 0-indexed; normalise to 1-indexed (homepage = 1)
-  internal.forEach(r => { const d = r['Crawl Depth'] != null ? r['Crawl Depth'] + 1 : 'N/A'; depthMap[d] = (depthMap[d]||0)+1; });
+  // Normalise SF crawl depth to 1-indexed: detect min depth in data and offset so min = 1
+  const rawDepths = internal.map(r => r['Crawl Depth']).filter(d => d != null).map(Number);
+  const depthOffset = rawDepths.length ? Math.max(0, 1 - Math.min(...rawDepths)) : 0;
+  internal.forEach(r => { const d = r['Crawl Depth'] != null ? r['Crawl Depth'] + depthOffset : 'N/A'; depthMap[d] = (depthMap[d]||0)+1; });
   const depthKeys = Object.keys(depthMap).sort((a,b) => { if (a==='N/A') return 1; if (b==='N/A') return -1; return Number(a)-Number(b); });
   makeChart('chart-crawl-depth', { type: 'bar', data: {
     labels: depthKeys.map(d => 'Depth ' + d),
@@ -881,7 +883,7 @@ async function init() {
       <td title="${r.Address}">${r.Address}</td>
       <td>${statusBadge(r['Status Code'])}</td>
       <td>${r['Indexability Status']||'—'}</td>
-      <td>${r['Crawl Depth'] != null ? r['Crawl Depth'] + 1 : '—'}</td>
+      <td>${r['Crawl Depth'] != null ? r['Crawl Depth'] + depthOffset : '—'}</td>
     </tr>`);
   addColFilter('idx-table', 2, 'Reason');
 
@@ -910,7 +912,7 @@ async function init() {
       <td title="${r.Address}">${r.Address}</td>
       <td style="color:var(--lime)">${fmt(r.Inlinks)}</td>
       <td>${fmt(r['Unique Inlinks'])}</td>
-      <td>${r['Crawl Depth'] != null ? r['Crawl Depth'] + 1 : '—'}</td>
+      <td>${r['Crawl Depth'] != null ? r['Crawl Depth'] + depthOffset : '—'}</td>
       <td>${statusBadge(r['Status Code'])}</td>
     </tr>`);
 

@@ -807,8 +807,8 @@ async function init() {
 
   // Crawl depth
   const depthMap = {};
-  // Use SF crawl depths as-is. Depth 0 = redirect start URL (artifact), Depth 1 = canonical homepage, Depth 2+ = content pages.
-  internal.forEach(r => { const d = r['Crawl Depth'] != null ? r['Crawl Depth'] : 'N/A'; depthMap[d] = (depthMap[d]||0)+1; });
+  // Depth 0 = redirect start URL artifact — excluded from chart. Depth 1 = canonical homepage, Depth 2+ = content pages.
+  internal.forEach(r => { if (r['Crawl Depth'] === 0) return; const d = r['Crawl Depth'] != null ? r['Crawl Depth'] : 'N/A'; depthMap[d] = (depthMap[d]||0)+1; });
   const depthKeys = Object.keys(depthMap).sort((a,b) => { if (a==='N/A') return 1; if (b==='N/A') return -1; return Number(a)-Number(b); });
   makeChart('chart-crawl-depth', { type: 'bar', data: {
     labels: depthKeys.map(d => 'Depth ' + d),

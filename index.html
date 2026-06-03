@@ -743,19 +743,22 @@ document.querySelectorAll('.tab-btn').forEach(btn => {
 
 // ── Main init ──
 async function init() {
-  const [internal, pageTitles, metaDesc, h1, structuredData, sitemaps] = await Promise.all([
+  const [internalRaw, pageTitles, metaDesc, h1, structuredData, sitemaps, responseCodes] = await Promise.all([
     fetchAll(TABLES.internal),
     fetchAll(TABLES.pageTitles),
     fetchAll(TABLES.metaDesc),
     fetchAll(TABLES.h1),
     fetchAll(TABLES.structuredData),
-    fetchAll(TABLES.sitemaps)
+    fetchAll(TABLES.sitemaps),
+    fetchAll(TABLES.responseCodes)
   ]);
+  // Use internal links table; fall back to response codes if internal is empty
+  const internal = internalRaw.length > 0 ? internalRaw : responseCodes;
 
   document.getElementById('global-loading').style.display = 'none';
   document.querySelectorAll('.tab-panel').forEach(p => { if(p.id === 'panel-summary') p.classList.add('active'); });
 
-  const crawlDate = internal[0]?.['Crawl Date'] || '2026-05-05';
+  const crawlDate = internal[0]?.['Crawl Date'] || internal[0]?.['Date'] || '2026-05-05';
   document.getElementById('crawl-date-display').textContent = crawlDate;
 
   // ── Derived data ──

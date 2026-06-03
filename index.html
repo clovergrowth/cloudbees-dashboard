@@ -11,9 +11,9 @@
 <style>
   /* ── Horizon UI design tokens (Lessen brand) ── */
   :root {
-    --lime: #2098D5;
-    --lime-dim: #1778a8;
-    --lime-glow: rgba(32,152,213,0.10);
+    --lime: #4D65FF;
+    --lime-dim: #3C4EC6;
+    --lime-glow: rgba(77,101,255,0.10);
     --black: #000000;
     --card: #0f0f0f;
     --card2: #181818;
@@ -70,7 +70,7 @@
     width: 38px; height: 38px; flex-shrink: 0;
     background: var(--lime);
     border-radius: 12px;
-    box-shadow: 0 4px 14px rgba(32,152,213,0.3);
+    box-shadow: 0 4px 14px rgba(77,101,255,0.3);
     display: flex; align-items: center; justify-content: center;
     font-weight: 900; color: #000; font-size: 16px;
   }
@@ -327,7 +327,7 @@
 
 <div id="pw-gate" style="display:none;position:fixed;inset:0;background:#000;z-index:9999;display:flex;align-items:center;justify-content:center;">
   <div style="background:#0f0f0f;border:1px solid rgba(255,255,255,0.06);border-radius:20px;padding:40px 48px;width:100%;max-width:380px;box-shadow:14px 17px 40px 4px rgba(0,0,0,0.6);text-align:center;">
-    <div style="width:48px;height:48px;background:#2098D5;border-radius:14px;box-shadow:0 4px 20px rgba(32,152,213,0.35);display:flex;align-items:center;justify-content:center;font-weight:900;color:#000;font-size:20px;margin:0 auto 24px;">L</div>
+    <div style="width:48px;height:48px;background:#4D65FF;border-radius:14px;box-shadow:0 4px 20px rgba(77,101,255,0.35);display:flex;align-items:center;justify-content:center;font-weight:900;color:#000;font-size:20px;margin:0 auto 24px;">C</div>
     <div style="font-size:18px;font-weight:700;margin-bottom:6px;letter-spacing:-0.5px;">Lessen SEO Dashboard</div>
     <div style="font-size:13px;color:#a3aed0;margin-bottom:28px;">Enter password to continue</div>
     <input id="pw-input" type="password" placeholder="Password" autofocus
@@ -336,7 +336,7 @@
       onkeydown="if(event.key==='Enter') checkPassword()">
     <div id="pw-error" style="color:#ee5d50;font-size:12px;min-height:18px;margin-bottom:10px;"></div>
     <button onclick="checkPassword()"
-      style="width:100%;background:#2098D5;color:#000;font-family:'DM Sans',Arial,sans-serif;font-weight:700;font-size:14px;border:none;border-radius:14px;padding:13px;cursor:pointer;box-shadow:0 4px 14px rgba(32,152,213,0.3);transition:opacity 0.2s ease;"
+      style="width:100%;background:#4D65FF;color:#000;font-family:'DM Sans',Arial,sans-serif;font-weight:700;font-size:14px;border:none;border-radius:14px;padding:13px;cursor:pointer;box-shadow:0 4px 14px rgba(77,101,255,0.3);transition:opacity 0.2s ease;"
       onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
       Unlock Dashboard
     </button>
@@ -419,7 +419,7 @@
     <div class="section-head"><h2>Response Codes</h2><p>HTTP status code distribution across all crawled URLs</p></div>
     <div class="charts-grid" id="rc-charts"></div>
     <div class="table-card">
-      <div class="table-header"><span style="display:flex;align-items:center;gap:12px">All URLs <input class="table-search" id="rc-search" placeholder="Filter URLs…" oninput="filterTable('rc-table', this.value)"></span><button onclick="exportTableCSV('rc-table','lessen-all-urls.csv')" style="background:var(--card2);border:1px solid var(--border);border-radius:50px;padding:6px 14px;color:var(--lime);font-family:'DM Sans',Arial,sans-serif;font-size:12px;cursor:pointer;display:flex;align-items:center;gap:6px;transition:all 0.25s ease;white-space:nowrap" onmouseover="this.style.background='var(--lime)';this.style.color='var(--black)'" onmouseout="this.style.background='var(--card2)';this.style.color='var(--lime)'">↓ CSV</button></div>
+      <div class="table-header"><span style="display:flex;align-items:center;gap:12px">All URLs <input class="table-search" id="rc-search" placeholder="Filter URLs…" oninput="filterTable('rc-table', this.value)"></span><button onclick="exportTableCSV('rc-table','cloudbees-all-urls.csv')" style="background:var(--card2);border:1px solid var(--border);border-radius:50px;padding:6px 14px;color:var(--lime);font-family:'DM Sans',Arial,sans-serif;font-size:12px;cursor:pointer;display:flex;align-items:center;gap:6px;transition:all 0.25s ease;white-space:nowrap" onmouseover="this.style.background='var(--lime)';this.style.color='var(--black)'" onmouseout="this.style.background='var(--card2)';this.style.color='var(--lime)'">↓ CSV</button></div>
       <div class="table-wrap"><table id="rc-table"></table></div>
     </div>
   </div>
@@ -429,7 +429,7 @@
     <div class="section-head"><h2>Indexability</h2><p>Indexable vs non-indexable URLs and reasons</p></div>
     <div class="charts-grid" id="idx-charts"></div>
     <div class="table-card">
-      <div class="table-header"><span style="display:flex;align-items:center;gap:12px">Non-Indexable URLs <input class="table-search" id="idx-search" placeholder="Filter…" oninput="filterTable('idx-table', this.value)"></span><button onclick="exportTableCSV('idx-table','lessen-non-indexable.csv')" style="background:var(--card2);border:1px solid var(--border);border-radius:50px;padding:6px 14px;color:var(--lime);font-family:'DM Sans',Arial,sans-serif;font-size:12px;cursor:pointer;display:flex;align-items:center;gap:6px;transition:all 0.25s ease;white-space:nowrap" onmouseover="this.style.background='var(--lime)';this.style.color='var(--black)'" onmouseout="this.style.background='var(--card2)';this.style.color='var(--lime)'">↓ CSV</button></div>
+      <div class="table-header"><span style="display:flex;align-items:center;gap:12px">Non-Indexable URLs <input class="table-search" id="idx-search" placeholder="Filter…" oninput="filterTable('idx-table', this.value)"></span><button onclick="exportTableCSV('idx-table','cloudbees-non-indexable.csv')" style="background:var(--card2);border:1px solid var(--border);border-radius:50px;padding:6px 14px;color:var(--lime);font-family:'DM Sans',Arial,sans-serif;font-size:12px;cursor:pointer;display:flex;align-items:center;gap:6px;transition:all 0.25s ease;white-space:nowrap" onmouseover="this.style.background='var(--lime)';this.style.color='var(--black)'" onmouseout="this.style.background='var(--card2)';this.style.color='var(--lime)'">↓ CSV</button></div>
       <div class="table-wrap"><table id="idx-table"></table></div>
     </div>
   </div>
@@ -439,7 +439,7 @@
     <div class="section-head"><h2>Site Structure</h2><p>Crawl depth distribution and most-linked pages</p></div>
     <div class="charts-grid" id="ss-charts"></div>
     <div class="table-card">
-      <div class="table-header">Top 20 Most Linked Pages<button onclick="exportTableCSV('ss-table','lessen-top-linked-pages.csv')" style="background:var(--card2);border:1px solid var(--border);border-radius:50px;padding:6px 14px;color:var(--lime);font-family:'DM Sans',Arial,sans-serif;font-size:12px;cursor:pointer;display:flex;align-items:center;gap:6px;transition:all 0.25s ease;white-space:nowrap" onmouseover="this.style.background='var(--lime)';this.style.color='var(--black)'" onmouseout="this.style.background='var(--card2)';this.style.color='var(--lime)'">↓ CSV</button></div>
+      <div class="table-header">Top 20 Most Linked Pages<button onclick="exportTableCSV('ss-table','cloudbees-top-linked-pages.csv')" style="background:var(--card2);border:1px solid var(--border);border-radius:50px;padding:6px 14px;color:var(--lime);font-family:'DM Sans',Arial,sans-serif;font-size:12px;cursor:pointer;display:flex;align-items:center;gap:6px;transition:all 0.25s ease;white-space:nowrap" onmouseover="this.style.background='var(--lime)';this.style.color='var(--black)'" onmouseout="this.style.background='var(--card2)';this.style.color='var(--lime)'">↓ CSV</button></div>
       <div class="table-wrap"><table id="ss-table"></table></div>
     </div>
   </div>
@@ -450,15 +450,15 @@
     <div class="scorecards" id="op-scorecards"></div>
     <div class="charts-grid" id="op-charts"></div>
     <div class="table-card">
-      <div class="table-header"><span style="display:flex;align-items:center;gap:12px">Page Titles <input class="table-search" id="pt-search" placeholder="Filter…" oninput="filterTable('pt-table', this.value)"></span><button onclick="exportTableCSV('pt-table','lessen-page-titles.csv')" style="background:var(--card2);border:1px solid var(--border);border-radius:50px;padding:6px 14px;color:var(--lime);font-family:'DM Sans',Arial,sans-serif;font-size:12px;cursor:pointer;display:flex;align-items:center;gap:6px;transition:all 0.25s ease;white-space:nowrap" onmouseover="this.style.background='var(--lime)';this.style.color='var(--black)'" onmouseout="this.style.background='var(--card2)';this.style.color='var(--lime)'">↓ CSV</button></div>
+      <div class="table-header"><span style="display:flex;align-items:center;gap:12px">Page Titles <input class="table-search" id="pt-search" placeholder="Filter…" oninput="filterTable('pt-table', this.value)"></span><button onclick="exportTableCSV('pt-table','cloudbees-page-titles.csv')" style="background:var(--card2);border:1px solid var(--border);border-radius:50px;padding:6px 14px;color:var(--lime);font-family:'DM Sans',Arial,sans-serif;font-size:12px;cursor:pointer;display:flex;align-items:center;gap:6px;transition:all 0.25s ease;white-space:nowrap" onmouseover="this.style.background='var(--lime)';this.style.color='var(--black)'" onmouseout="this.style.background='var(--card2)';this.style.color='var(--lime)'">↓ CSV</button></div>
       <div class="table-wrap"><table id="pt-table"></table></div>
     </div>
     <div class="table-card" style="margin-top:16px">
-      <div class="table-header"><span style="display:flex;align-items:center;gap:12px">Meta Descriptions <input class="table-search" id="md-search" placeholder="Filter…" oninput="filterTable('md-table', this.value)"></span><button onclick="exportTableCSV('md-table','lessen-meta-descriptions.csv')" style="background:var(--card2);border:1px solid var(--border);border-radius:50px;padding:6px 14px;color:var(--lime);font-family:'DM Sans',Arial,sans-serif;font-size:12px;cursor:pointer;display:flex;align-items:center;gap:6px;transition:all 0.25s ease;white-space:nowrap" onmouseover="this.style.background='var(--lime)';this.style.color='var(--black)'" onmouseout="this.style.background='var(--card2)';this.style.color='var(--lime)'">↓ CSV</button></div>
+      <div class="table-header"><span style="display:flex;align-items:center;gap:12px">Meta Descriptions <input class="table-search" id="md-search" placeholder="Filter…" oninput="filterTable('md-table', this.value)"></span><button onclick="exportTableCSV('md-table','cloudbees-meta-descriptions.csv')" style="background:var(--card2);border:1px solid var(--border);border-radius:50px;padding:6px 14px;color:var(--lime);font-family:'DM Sans',Arial,sans-serif;font-size:12px;cursor:pointer;display:flex;align-items:center;gap:6px;transition:all 0.25s ease;white-space:nowrap" onmouseover="this.style.background='var(--lime)';this.style.color='var(--black)'" onmouseout="this.style.background='var(--card2)';this.style.color='var(--lime)'">↓ CSV</button></div>
       <div class="table-wrap"><table id="md-table"></table></div>
     </div>
     <div class="table-card" style="margin-top:16px">
-      <div class="table-header"><span style="display:flex;align-items:center;gap:12px">H1 Tags <input class="table-search" id="h1-search" placeholder="Filter…" oninput="filterTable('h1-table', this.value)"></span><button onclick="exportTableCSV('h1-table','lessen-h1-tags.csv')" style="background:var(--card2);border:1px solid var(--border);border-radius:50px;padding:6px 14px;color:var(--lime);font-family:'DM Sans',Arial,sans-serif;font-size:12px;cursor:pointer;display:flex;align-items:center;gap:6px;transition:all 0.25s ease;white-space:nowrap" onmouseover="this.style.background='var(--lime)';this.style.color='var(--black)'" onmouseout="this.style.background='var(--card2)';this.style.color='var(--lime)'">↓ CSV</button></div>
+      <div class="table-header"><span style="display:flex;align-items:center;gap:12px">H1 Tags <input class="table-search" id="h1-search" placeholder="Filter…" oninput="filterTable('h1-table', this.value)"></span><button onclick="exportTableCSV('h1-table','cloudbees-h1-tags.csv')" style="background:var(--card2);border:1px solid var(--border);border-radius:50px;padding:6px 14px;color:var(--lime);font-family:'DM Sans',Arial,sans-serif;font-size:12px;cursor:pointer;display:flex;align-items:center;gap:6px;transition:all 0.25s ease;white-space:nowrap" onmouseover="this.style.background='var(--lime)';this.style.color='var(--black)'" onmouseout="this.style.background='var(--card2)';this.style.color='var(--lime)'">↓ CSV</button></div>
       <div class="table-wrap"><table id="h1-table"></table></div>
     </div>
   </div>
@@ -469,7 +469,7 @@
     <div class="scorecards" id="ci-scorecards"></div>
     <div class="charts-grid" id="ci-charts"></div>
     <div class="table-card">
-      <div class="table-header"><span style="display:flex;align-items:center;gap:12px">Content Issues <input class="table-search" id="ci-search" placeholder="Filter URLs…" oninput="filterTable('ci-table', this.value)"></span><button onclick="exportTableCSV('ci-table','lessen-content-issues.csv')" style="background:var(--card2);border:1px solid var(--border);border-radius:50px;padding:6px 14px;color:var(--lime);font-family:'DM Sans',Arial,sans-serif;font-size:12px;cursor:pointer;display:flex;align-items:center;gap:6px;transition:all 0.25s ease;white-space:nowrap" onmouseover="this.style.background='var(--lime)';this.style.color='var(--black)'" onmouseout="this.style.background='var(--card2)';this.style.color='var(--lime)'">↓ CSV</button></div>
+      <div class="table-header"><span style="display:flex;align-items:center;gap:12px">Content Issues <input class="table-search" id="ci-search" placeholder="Filter URLs…" oninput="filterTable('ci-table', this.value)"></span><button onclick="exportTableCSV('ci-table','cloudbees-content-issues.csv')" style="background:var(--card2);border:1px solid var(--border);border-radius:50px;padding:6px 14px;color:var(--lime);font-family:'DM Sans',Arial,sans-serif;font-size:12px;cursor:pointer;display:flex;align-items:center;gap:6px;transition:all 0.25s ease;white-space:nowrap" onmouseover="this.style.background='var(--lime)';this.style.color='var(--black)'" onmouseout="this.style.background='var(--card2)';this.style.color='var(--lime)'">↓ CSV</button></div>
       <div class="table-wrap"><table id="ci-table"></table></div>
     </div>
   </div>
@@ -480,7 +480,7 @@
     <div class="scorecards" id="sd-scorecards"></div>
     <div class="charts-grid" id="sd-charts"></div>
     <div class="table-card">
-      <div class="table-header"><span style="display:flex;align-items:center;gap:12px">Structured Data Detail <input class="table-search" id="sd-search" placeholder="Filter…" oninput="filterTable('sd-table', this.value)"></span><button onclick="exportTableCSV('sd-table','lessen-structured-data.csv')" style="background:var(--card2);border:1px solid var(--border);border-radius:50px;padding:6px 14px;color:var(--lime);font-family:'DM Sans',Arial,sans-serif;font-size:12px;cursor:pointer;display:flex;align-items:center;gap:6px;transition:all 0.25s ease;white-space:nowrap" onmouseover="this.style.background='var(--lime)';this.style.color='var(--black)'" onmouseout="this.style.background='var(--card2)';this.style.color='var(--lime)'">↓ CSV</button></div>
+      <div class="table-header"><span style="display:flex;align-items:center;gap:12px">Structured Data Detail <input class="table-search" id="sd-search" placeholder="Filter…" oninput="filterTable('sd-table', this.value)"></span><button onclick="exportTableCSV('sd-table','cloudbees-structured-data.csv')" style="background:var(--card2);border:1px solid var(--border);border-radius:50px;padding:6px 14px;color:var(--lime);font-family:'DM Sans',Arial,sans-serif;font-size:12px;cursor:pointer;display:flex;align-items:center;gap:6px;transition:all 0.25s ease;white-space:nowrap" onmouseover="this.style.background='var(--lime)';this.style.color='var(--black)'" onmouseout="this.style.background='var(--card2)';this.style.color='var(--lime)'">↓ CSV</button></div>
       <div class="table-wrap"><table id="sd-table"></table></div>
     </div>
   </div>
@@ -490,7 +490,7 @@
     <div class="section-head"><h2>Security</h2><p>HTTPS vs HTTP and protocol analysis</p></div>
     <div class="charts-grid" id="sec-charts"></div>
     <div class="table-card">
-      <div class="table-header"><span style="display:flex;align-items:center;gap:12px">HTTP URLs (Security Risk) <input class="table-search" id="sec-search" placeholder="Filter…" oninput="filterTable('sec-table', this.value)"></span><button onclick="exportTableCSV('sec-table','lessen-http-urls.csv')" style="background:var(--card2);border:1px solid var(--border);border-radius:50px;padding:6px 14px;color:var(--lime);font-family:'DM Sans',Arial,sans-serif;font-size:12px;cursor:pointer;display:flex;align-items:center;gap:6px;transition:all 0.25s ease;white-space:nowrap" onmouseover="this.style.background='var(--lime)';this.style.color='var(--black)'" onmouseout="this.style.background='var(--card2)';this.style.color='var(--lime)'">↓ CSV</button></div>
+      <div class="table-header"><span style="display:flex;align-items:center;gap:12px">HTTP URLs (Security Risk) <input class="table-search" id="sec-search" placeholder="Filter…" oninput="filterTable('sec-table', this.value)"></span><button onclick="exportTableCSV('sec-table','cloudbees-http-urls.csv')" style="background:var(--card2);border:1px solid var(--border);border-radius:50px;padding:6px 14px;color:var(--lime);font-family:'DM Sans',Arial,sans-serif;font-size:12px;cursor:pointer;display:flex;align-items:center;gap:6px;transition:all 0.25s ease;white-space:nowrap" onmouseover="this.style.background='var(--lime)';this.style.color='var(--black)'" onmouseout="this.style.background='var(--card2)';this.style.color='var(--lime)'">↓ CSV</button></div>
       <div class="table-wrap"><table id="sec-table"></table></div>
     </div>
   </div>
@@ -501,7 +501,7 @@
     <div class="scorecards" id="sm-scorecards"></div>
     <div class="charts-grid" id="sm-charts"></div>
     <div class="table-card">
-      <div class="table-header"><span style="display:flex;align-items:center;gap:12px">Sitemap URLs <input class="table-search" id="sm-search" placeholder="Filter…" oninput="filterTable('sm-table', this.value)"></span><button onclick="exportTableCSV('sm-table','lessen-sitemaps.csv')" style="background:var(--card2);border:1px solid var(--border);border-radius:50px;padding:6px 14px;color:var(--lime);font-family:'DM Sans',Arial,sans-serif;font-size:12px;cursor:pointer;display:flex;align-items:center;gap:6px;transition:all 0.25s ease;white-space:nowrap" onmouseover="this.style.background='var(--lime)';this.style.color='var(--black)'" onmouseout="this.style.background='var(--card2)';this.style.color='var(--lime)'">↓ CSV</button></div>
+      <div class="table-header"><span style="display:flex;align-items:center;gap:12px">Sitemap URLs <input class="table-search" id="sm-search" placeholder="Filter…" oninput="filterTable('sm-table', this.value)"></span><button onclick="exportTableCSV('sm-table','cloudbees-sitemaps.csv')" style="background:var(--card2);border:1px solid var(--border);border-radius:50px;padding:6px 14px;color:var(--lime);font-family:'DM Sans',Arial,sans-serif;font-size:12px;cursor:pointer;display:flex;align-items:center;gap:6px;transition:all 0.25s ease;white-space:nowrap" onmouseover="this.style.background='var(--lime)';this.style.color='var(--black)'" onmouseout="this.style.background='var(--card2)';this.style.color='var(--lime)'">↓ CSV</button></div>
       <div class="table-wrap"><table id="sm-table"></table></div>
     </div>
   </div>
@@ -529,7 +529,7 @@ const TABLES = {
   sitemaps: 'tblBquCSAMg5XgNoh'
 };
 
-const LIME = '#2098D5';
+const LIME = '#4D65FF';
 const RED = '#ff4757';
 const BLUE = '#4fc3f7';
 const ORANGE = '#ff9800';
